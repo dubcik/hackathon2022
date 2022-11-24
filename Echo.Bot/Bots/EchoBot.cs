@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -13,6 +14,7 @@ public class EchoBot : ActivityHandler
 		CancellationToken cancellationToken)
 	{
 		var replyText = $"Response: {turnContext.Activity.Text}";
+		Debug.WriteLine(replyText);
 		var response = await turnContext.SendActivityAsync(
 			MessageFactory.Text(replyText, replyText),
 			cancellationToken);

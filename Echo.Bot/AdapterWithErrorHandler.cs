@@ -1,4 +1,5 @@
-﻿using Microsoft.Bot.Builder.Integration.AspNet.Core;
+﻿using System.Diagnostics;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ public class AdapterWithErrorHandler : CloudAdapter
 	{
 		OnTurnError = async (turnContext, exception) =>
 		{
+			Debug.WriteLine("Do I got an exception here?");
 			logger.LogError(
 				exception, "[OnTurnError] unhandled error : {ExceptionMessage}", exception.Message);
 			await turnContext.SendActivityAsync("The bot encountered an error or bug.");
