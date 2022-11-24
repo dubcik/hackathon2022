@@ -12,7 +12,7 @@ public class EchoBot : ActivityHandler
 		ITurnContext<IMessageActivity> turnContext,
 		CancellationToken cancellationToken)
 	{
-		var replyText = $"Something more elaborative: always same message";
+		var replyText = $"Response: {turnContext.Activity.Text}";
 		var response = await turnContext.SendActivityAsync(
 			MessageFactory.Text(replyText, replyText),
 			cancellationToken);
