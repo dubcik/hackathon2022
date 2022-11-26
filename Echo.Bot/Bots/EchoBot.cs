@@ -37,10 +37,9 @@ public class EchoBot : ActivityHandler
 				if (Regex.IsMatch(turnContext.Activity.Text, patern_for_manager))
 				{
 					//advance profile
-					var responseanswer = "Your Line Manager is https://projectplan.amdaris.com/profile";
+					var responseanswer = "manager";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_manager, RegexOptions.Compiled).ToString().ToLower())
 					{
-
 						case "manager":
 							response_message = responseanswer;
 							break;
@@ -49,76 +48,40 @@ public class EchoBot : ActivityHandler
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_holiday))
 				{
 					//hi-bob my time off
-					var responseanswer = "You can check holiday here: https://app.hibob.com/time-off/my-time-off";
+					var responseanswer = "holiday";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_holiday, RegexOptions.Compiled).ToString().ToLower())
 					{
-						case "holiday":
-							response_message = responseanswer;
-							break;
-						case "holyday":
+						case "holiday" or "holyday":
 							response_message = responseanswer;
 							break;
 					}
 				}
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_learning))
 				{
-					var responseanswer = "You can find information about your question here: " + System.Environment.NewLine +
-								//sharepoint learning page
-								"https://amdaris.sharepoint.com/sites/AmdarisLearning  " + System.Environment.NewLine +
-								"or read some Book here: " + System.Environment.NewLine +
-								//sharepoint Ebook
-								"https://amdaris.sharepoint.com/Employee%20Documents/Forms/AllItems.aspx?id=%2FEmployee%20Documents%2FEBooks&viewid=6a0b0218%2Dbb16%2D4d10%2D952b%2D906db233ae10 " + System.Environment.NewLine +
-								"or find other documents here: " + System.Environment.NewLine +
-								//sharepoint search "learning"
-								"https://amdaris.sharepoint.com/_layouts/15/osssearchresults.aspx?u=https%3A%2F%2Famdaris%2Esharepoint%2Ecom&k=learning&ql=2057";
+					var responseanswer = "learning";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_learning, RegexOptions.Compiled).ToString().ToLower())
 					{
-						case "learn":
-							response_message = responseanswer;
-							break;
-						case "learning":
+						case "learn" or "learning":
 							response_message = responseanswer;
 							break;
 					}
 				}
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_employee))
 				{
-					var responseanswer = "You can find information about your local department here:" + System.Environment.NewLine +
-						//hi-bob dicertory
-						"https://app.hibob.com/people/directory" + System.Environment.NewLine +
-						"or you can check your organisation levels here:" + System.Environment.NewLine +
-						//hi-bob org chart
-						"https://app.hibob.com/employeeDirectory/company-org-chart";
+					var responseanswer = "employee";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_employee, RegexOptions.Compiled).ToString().ToLower())
 					{
-						case "employee":
-							response_message = responseanswer;
-							break;
-						case "employer":
-							response_message = responseanswer;
-							break;
-						case "colleque":
-							response_message = responseanswer;
-							break;
-						case "member":
-							response_message = responseanswer;
-							break;
-						case "worker":
+						case "employee" or "employer" or "colleque" or "member" or "worker":
 							response_message = responseanswer;
 							break;
 					}
 				}
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_IT))
 				{
-					var responseanswer = "You can make new ticket here:" + System.Environment.NewLine +
-						//IT ticket
-						"https://amdaris.atlassian.net/servicedesk/customer/portal/2";
+					var responseanswer = "IT";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_IT, RegexOptions.Compiled).ToString().ToLower())
 					{
-						case "it":
-							response_message = responseanswer;
-							break;
-						case "technical help":
+						case "it" or "technical help":
 							response_message = responseanswer;
 							break;
 					}
