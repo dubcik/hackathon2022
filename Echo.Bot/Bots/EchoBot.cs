@@ -15,10 +15,11 @@ public class EchoBot : ActivityHandler
 		CancellationToken cancellationToken)
 	{
 		var response_message = "";
-		var patern_for_manager = @"(?#\s*\W*\s*\w*\s*)(?:[Manager]{7})|(?:[manager]{7})(?#\s*\W*\s*\w*\s*)";
-		var patern_for_holiday = @"(?#\s*\W*\s*\w*\s*)(?:[Holiday]{7})|(?:[holiday]{7})|(?:[holyday]{7})|(?:[Holyday]{7})(?#\s*\W*\s*\w*\s*)";
+		var patern_for_manager = @"(?#\s*\W*\s*\w*\s*)(?:Manager)|(?:manager)(?#\s*\W*\s*\w*\s*)";
+		var patern_for_holiday = @"(?#\s*\W*\s*\w*\s*)(?:Holiday)|(?:holiday)|(?:holyday)|(?:Holyday)(?#\s*\W*\s*\w*\s*)";
 		var patern_for_learning = @"(?#\s*\W*\s*\w*\s*)(?:L*l*earning)|(?:learn)(?#\s*\W*\s*\w*\s*)";
 		var patern_for_employee = @"(?#\s*\W*\s*\w*\s*)(?:employee)|(?:employer)|(?:colleque)|(?:member)|(?:worker)(?#\s*\W*\s*\w*\s*)";
+		var patern_for_IT = @"(?#\s*\W*\s*\w*\s*)(?:IT)|(?:It)|(?:iT)|(?:technical\s*help)(?#\s*\W*\s*\w*\s*)";
 		if (Regex.IsMatch(turnContext.Activity.Text, patern_for_manager))
 		{
 			//advance profile
@@ -101,6 +102,30 @@ public class EchoBot : ActivityHandler
 					response_message = responseanswer;
 					break;
 				case "worker":
+					response_message = responseanswer;
+					break;
+			}
+		}
+		else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_IT))
+		{
+			var responseanswer = "You can make new ticket here:" + System.Environment.NewLine +
+				//IT ticket
+				"https://amdaris.atlassian.net/servicedesk/customer/portal/2";
+			switch (Regex.Match(turnContext.Activity.Text, patern_for_IT, RegexOptions.Compiled).ToString())
+			{
+				case "IT":
+					response_message = responseanswer;
+					break;
+				case "it":
+					response_message = responseanswer;
+					break;
+				case "It":
+					response_message = responseanswer;
+					break;
+				case "iT":
+					response_message = responseanswer;
+					break;
+				case "technical help":
 					response_message = responseanswer;
 					break;
 			}
