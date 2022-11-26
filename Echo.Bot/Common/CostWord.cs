@@ -2,9 +2,10 @@ using System.Collections.Generic;
 
 namespace Echo.Bot.Common
 {
-	public struct CostList
+	public struct CostWord
 	{
 		public string question;
-		public Dictionary<int, string> regexes;
+		public string regex;
+		public int cost;
 	}
 }
