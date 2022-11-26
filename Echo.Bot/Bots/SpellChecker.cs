@@ -1,5 +1,4 @@
 using Echo.Bot.Common;
-using Echo.Bot.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -8,14 +7,14 @@ namespace Echo.Bot.Bots
 {
 	internal class SpellChecker
 	{
-		private readonly CsvRepository csv;
+		private readonly IDictionary<string, string> data;
 		private IList<string> historyMatches;
 		private CostList costList;
 		private const string anychar = ".*";
 
-		public SpellChecker()
+		public SpellChecker(IDictionary<string, string> externalData)
 		{
-			csv = new CsvRepository();
+			data = externalData;
 			costList = new();
 			historyMatches = new List<string>();
 		}
@@ -29,16 +28,19 @@ namespace Echo.Bot.Bots
 			costList.regexes = new();
 			historyMatches.Clear();
 
-			for(int cost = 1; cost <= limit; cost++)
+			for (int cost = 0; cost <= limit; cost++)
 			{
 
 				for (int pos = 0; pos < frage.Length - cost; pos++)
 				{
-					string regex = string.Format("{1}{0}{1}", frage.Remove(pos, cost).Insert(pos, anychar), anychar);
-					string match = csv.Keys.FirstOrDefault(question => Regex.IsMatch(question.ToLower(), regex));
+					string regex = string.Format("{0}{1}{0}", anychar, sentance.ToLower().Remove(pos, cost).Insert(pos, anychar));
+					string match = data.Keys.FirstOrDefault(question => Regex.IsMatch(question.ToLower(), regex));
 
 					if (!string.IsNullOrWhiteSpace(match) && !historyMatches.Contains(match))
+					{
 						costList.regexes.TryAdd(cost, regex);
+						historyMatches.Add(match);
+					}
 				}
 			}
 
