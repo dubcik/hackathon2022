@@ -22,7 +22,7 @@ namespace Echo.Bot.Repository
 			{
 				var fields = dataParser.ReadFields();
 
-				Add(fields.FirstOrDefault().ToLower(), fields.LastOrDefault().ToLower());
+				Add(fields.FirstOrDefault(), fields[1].Replace("\\n", Environment.NewLine));
 			}
 		}
 	}
