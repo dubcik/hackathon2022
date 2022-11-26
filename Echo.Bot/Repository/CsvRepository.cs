@@ -11,6 +11,7 @@ namespace Echo.Bot.Repository
 
 		internal CsvRepository()
 		{
+			Add("default", "Hmmm... Honestly I don't know how to answer that. Try to contact your line manager or raise the question to HR department");
 			using TextFieldParser dataParser = new(path)
 			{
 				TextFieldType = FieldType.Delimited,
