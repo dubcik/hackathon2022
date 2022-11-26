@@ -19,6 +19,8 @@ public class EchoBot : ActivityHandler
 		var response_message = new Parser.ParseQuery().ParseResponse(turnContext.Activity.Text);
 
 		Debug.WriteLine(response_message);
+		var activity = MessageFactory.Text(response_message, response_message);
+
 		var response = await turnContext.SendActivityAsync(
 			MessageFactory.Text(response_message, response_message),
 			cancellationToken);
@@ -36,7 +38,7 @@ public class EchoBot : ActivityHandler
 		" - Finance department" + System.Environment.NewLine +
 		" - Talent department" + System.Environment.NewLine +
 		" - Workforce Department(admin / IT)" + System.Environment.NewLine +
-		"etc. (manager, learning, employee, technical help, ";
+		"etc. (manager, learning, employee, technical help)";
 		foreach (var member in membersAdded)
 		{
 			if (member.Id != turnContext.Activity.Recipient.Id)
