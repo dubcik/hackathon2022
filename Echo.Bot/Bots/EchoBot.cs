@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Echo.Bot.Repository;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 
@@ -22,7 +23,8 @@ public class EchoBot : ActivityHandler
 		var patern_for_employee = @"(?#\s*\W*\s*\w*\s*)(?:employee)|(?:employer)|(?:colleque)|(?:member)|(?:worker)(?#\s*\W*\s*\w*\s*)";
 		var patern_for_IT = @"(?#\s*\W*\s*\w*\s*)(?:IT)|(?:It)|(?:iT)|(?:technical\s*help)(?#\s*\W*\s*\w*\s*)";
 		var patern_first_response = @"(?#\s*\W*\s*\w*\s*)(?:General\s+question|General|general)|(?:Benefits\s+and\s+certifications|Benefits|benefits|certifications|Certifications|certification|Certification)|(?:Finance\s+department|Finance|finance\s+department|finance)|(?:Talent\s+department|talent\s+department|Talent|talent|Talents|talents)|(?:Workforce\s+Department|workforce\s+Department|Workforce|workforce)(?#\s*\W*\s*\w*\s*)";
-		
+		CsvRepository csv = new CsvRepository();
+		var key_For_Csv = string.Empty;
 			try
 			{
 				if (Regex.IsMatch(turnContext.Activity.Text, patern_first_response))
@@ -37,52 +39,52 @@ public class EchoBot : ActivityHandler
 				if (Regex.IsMatch(turnContext.Activity.Text, patern_for_manager))
 				{
 					//advance profile
-					var responseanswer = "manager";
+					key_For_Csv = "manager";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_manager, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "manager":
-							response_message = responseanswer;
+							response_message = csv[key_For_Csv];
 							break;
 					}
 				}
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_holiday))
 				{
 					//hi-bob my time off
-					var responseanswer = "holiday";
+					key_For_Csv = "holiday";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_holiday, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "holiday" or "holyday":
-							response_message = responseanswer;
+							response_message = csv[key_For_Csv];
 							break;
 					}
 				}
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_learning))
 				{
-					var responseanswer = "learning";
+					key_For_Csv = "learning";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_learning, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "learn" or "learning":
-							response_message = responseanswer;
+							response_message = csv[key_For_Csv];
 							break;
 					}
 				}
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_employee))
 				{
-					var responseanswer = "employee";
+					key_For_Csv = "employee";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_employee, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "employee" or "employer" or "colleque" or "member" or "worker":
-							response_message = responseanswer;
+							response_message = csv[key_For_Csv];
 							break;
 					}
 				}
 				else if (Regex.IsMatch(turnContext.Activity.Text, patern_for_IT))
 				{
-					var responseanswer = "IT";
+					key_For_Csv = "IT";
 					switch (Regex.Match(turnContext.Activity.Text, patern_for_IT, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "it" or "technical help":
-							response_message = responseanswer;
+							response_message = csv[key_For_Csv];
 							break;
 					}
 				}
