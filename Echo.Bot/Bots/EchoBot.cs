@@ -38,13 +38,10 @@ public class EchoBot : ActivityHandler
 				{
 					//advance profile
 					var responseanswer = "Your Line Manager is https://projectplan.amdaris.com/profile";
-					switch (Regex.Match(turnContext.Activity.Text, patern_for_manager, RegexOptions.Compiled).ToString())
+					switch (Regex.Match(turnContext.Activity.Text, patern_for_manager, RegexOptions.Compiled).ToString().ToLower())
 					{
 
 						case "manager":
-							response_message = responseanswer;
-							break;
-						case "Manager":
 							response_message = responseanswer;
 							break;
 					}
@@ -53,18 +50,12 @@ public class EchoBot : ActivityHandler
 				{
 					//hi-bob my time off
 					var responseanswer = "You can check holiday here: https://app.hibob.com/time-off/my-time-off";
-					switch (Regex.Match(turnContext.Activity.Text, patern_for_holiday, RegexOptions.Compiled).ToString())
+					switch (Regex.Match(turnContext.Activity.Text, patern_for_holiday, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "holiday":
 							response_message = responseanswer;
 							break;
-						case "Holiday":
-							response_message = responseanswer;
-							break;
 						case "holyday":
-							response_message = responseanswer;
-							break;
-						case "Holyday":
 							response_message = responseanswer;
 							break;
 					}
@@ -80,15 +71,12 @@ public class EchoBot : ActivityHandler
 								"or find other documents here: " + System.Environment.NewLine +
 								//sharepoint search "learning"
 								"https://amdaris.sharepoint.com/_layouts/15/osssearchresults.aspx?u=https%3A%2F%2Famdaris%2Esharepoint%2Ecom&k=learning&ql=2057";
-					switch (Regex.Match(turnContext.Activity.Text, patern_for_learning, RegexOptions.Compiled).ToString())
+					switch (Regex.Match(turnContext.Activity.Text, patern_for_learning, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "learn":
 							response_message = responseanswer;
 							break;
 						case "learning":
-							response_message = responseanswer;
-							break;
-						case "Learning":
 							response_message = responseanswer;
 							break;
 					}
@@ -101,7 +89,7 @@ public class EchoBot : ActivityHandler
 						"or you can check your organisation levels here:" + System.Environment.NewLine +
 						//hi-bob org chart
 						"https://app.hibob.com/employeeDirectory/company-org-chart";
-					switch (Regex.Match(turnContext.Activity.Text, patern_for_employee, RegexOptions.Compiled).ToString())
+					switch (Regex.Match(turnContext.Activity.Text, patern_for_employee, RegexOptions.Compiled).ToString().ToLower())
 					{
 						case "employee":
 							response_message = responseanswer;
@@ -125,18 +113,9 @@ public class EchoBot : ActivityHandler
 					var responseanswer = "You can make new ticket here:" + System.Environment.NewLine +
 						//IT ticket
 						"https://amdaris.atlassian.net/servicedesk/customer/portal/2";
-					switch (Regex.Match(turnContext.Activity.Text, patern_for_IT, RegexOptions.Compiled).ToString())
+					switch (Regex.Match(turnContext.Activity.Text, patern_for_IT, RegexOptions.Compiled).ToString().ToLower())
 					{
-						case "IT":
-							response_message = responseanswer;
-							break;
 						case "it":
-							response_message = responseanswer;
-							break;
-						case "It":
-							response_message = responseanswer;
-							break;
-						case "iT":
 							response_message = responseanswer;
 							break;
 						case "technical help":
