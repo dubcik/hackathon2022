@@ -5,7 +5,7 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 
 namespace Echo.Bot.Controllers;
 
-[Route("")]
+[Route("/api/messages")]
 [ApiController]
 public class BotController : ControllerBase
 {
