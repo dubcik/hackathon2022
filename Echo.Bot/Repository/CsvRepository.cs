@@ -7,7 +7,7 @@ namespace Echo.Bot.Repository
 {
 	internal class CsvRepository : Dictionary<string, string>
 	{
-		const string path = @"C:\Users\alexandru.pirlog\Desktop\dbdump.csv";
+		const string path = @"Resources\dbdump.csv";
 
 		internal CsvRepository()
 		{
