@@ -16,6 +16,21 @@ public class EchoBot : ActivityHandler
 		ITurnContext<IMessageActivity> turnContext,
 		CancellationToken cancellationToken)
 	{
+		if (turnContext.Activity.Text == "commands")
+		{
+			string welcomeText = "Hello and welcome!" + System.Environment.NewLine +
+			                     "Select subject for your question" + System.Environment.NewLine +
+			                     " - General question" + System.Environment.NewLine +
+			                     " - Benefits and certifications" + System.Environment.NewLine +
+			                     " - Finance department" + System.Environment.NewLine +
+			                     " - Talent department" + System.Environment.NewLine +
+			                     " - Workforce Department(admin / IT)" + System.Environment.NewLine +
+			                     "etc. (manager, learning, employee, technical help)";
+			await turnContext.SendActivityAsync(
+				MessageFactory.Text(welcomeText, welcomeText),
+				cancellationToken);
+			return;
+		}
 		var response_message = new Parser.ParseQuery().ParseResponse(turnContext.Activity.Text);
 
 		Debug.WriteLine(response_message);
