@@ -2,6 +2,8 @@ using Echo.Bot.Repository;
 using Microsoft.Bot.Builder;
 using System.Text.RegularExpressions;
 using System;
+using Echo.Bot.Bots;
+using System.Linq;
 
 namespace Echo.Bot.Parser
 {
@@ -151,6 +153,26 @@ namespace Echo.Bot.Parser
 				{
 					key_For_Csv = "default";
 					response_message = csv[key_For_Csv];
+
+					var variants = new SpellChecker(new CsvRepository()).GetVariants(textToParse);
+
+					if (variants.Count > 0)
+					{
+						var averageCost = 0;
+
+						foreach (var variant in variants)
+						{
+							averageCost += variant.cost;
+						}
+
+						averageCost /= variants.Count;
+
+						response_message += String.Format("{0}Similar questions:{0}", Environment.NewLine);
+
+						var alternatives = variants.Where(variant => variant.cost <= averageCost).Select(word => word.question);
+
+						response_message += string.Join(Environment.NewLine, alternatives);
+					}
 				}
 			}
 
